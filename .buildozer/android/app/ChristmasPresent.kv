@@ -1,0 +1,56 @@
+<ChristmasPresent>
+    HomeScreen:
+    LivingRoom:
+
+<HomeScreen>
+    name: "HomeScreen"
+    Image:
+        size_hint: (1, 1)  # Stretch to fill the screen
+        source: "pics/christmas.png"
+
+    BoxLayout:
+        orientation: "vertical"
+        padding: 50
+
+        Label:
+            canvas.before:
+                Color:
+                    rgba: (.2,.2,.2, 1)
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            text: "Morgan's Christmas Present"
+            color: 1, 1, 1, 1
+            font_size: 25
+            size_hint: (1, 0.1)  # Use a smaller space for the label
+
+        BoxLayout:
+            orientation: "vertical"
+            size_hint: (1, 0.9)  # Occupies remaining vertical space
+
+            # Centering the Button
+            AnchorLayout:
+                anchor_x: "center"  # Horizontal centering
+                anchor_y: "bottom"  # Vertical centering
+
+                Button:
+                    size_hint: (.6, .2)  # Button size is 30% width, 20% height of parent
+                    background_color: [.1, 1, 0, 1]
+                    text: "Find your Present!"
+                    on_press: app.root.current = "LivingRoom"
+
+<LivingRoom>:
+    name: "LivingRoom"
+    Image:
+        source: 
+            "pics/LivingRoom/livingroom.png"
+    BoxLayout:
+        orientation: 'horizontal'
+        Button:
+            size_hint: .2, .25
+        Label:
+        Button:
+            size_hint: .2, .25
+
+
+

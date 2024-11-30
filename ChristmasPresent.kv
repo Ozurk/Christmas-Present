@@ -1,24 +1,61 @@
 <ChristmasPresent>
     HomeScreen:
+    LivingRoom:
+    HalfBath:
 
 <HomeScreen>
     name: "HomeScreen"
     Image:
-        height: root.height
-        width: root.width
-        source:"pics/Christmas_Present.png"
+        size_hint: (1, 1)  # Stretch to fill the screen
+        source: "pics/christmas.png"
 
     BoxLayout:
-        padding: 40
         orientation: "vertical"
+        padding: 50
+
         Label:
-            text: "Morgan's Christmas Present"
-            font_size: 25
+            canvas.before:
+                Color:
+                    rgba: (.2,.2,.2, 1)
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            text: "Morgan's Christmas App II"
+            font_name: "Roboto-BoldItalic"
+            color: 1, 1, 1, 1
+            font_size: 30
+            size_hint: (1, 0.1)  # Use a smaller space for the label
+
         BoxLayout:
-            padding: 20
             orientation: "vertical"
-            Button:
-                background_color: [0,1,0,1]
-                text: "Find your Present!"
-                
-                
+            size_hint: (1, 0.9)  # Occupies remaining vertical space
+
+            # Centering the Button
+            AnchorLayout:
+                anchor_x: "center"  # Horizontal centering
+                anchor_y: "bottom"  # Vertical centering
+
+                Button:
+                    size_hint: (.6, .2)  # Button size is 30% width, 20% height of parent
+                    background_color: [.1, 1, 0, 1]
+                    text: "Find your Present!"
+                    on_press: app.root.current = "Li"
+
+<LivingRoom>:
+    name: "LivingRoom"
+    Image:
+        source: 
+            "pics/LivingRoom/livingroom.png"
+    BoxLayout:
+        orientation: 'horizontal'
+        Button:
+            size_hint: .2, .25
+        Label:
+        Button:
+            size_hint: .2, .25
+
+
+<HalfBath>
+    name: "HalfBath"
+
+
