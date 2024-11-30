@@ -46,9 +46,11 @@ class LaundryRoom(Screen):
 class HalfBath(Screen):
     pass
 
-class HalfBathCloset(Screen):
+class Closet(Screen):
     pass
 
+class Kitchen(Screen):
+    pass
 
 
 if __name__ == '__main__':

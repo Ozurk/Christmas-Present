@@ -1,6 +1,9 @@
 <ChristmasPresent>
     HomeScreen:
     LivingRoom:
+    HalfBath:
+    Kitchen:
+    Closet:
 
 <HomeScreen>
     name: "HomeScreen"
@@ -19,9 +22,10 @@
                 Rectangle:
                     size: self.size
                     pos: self.pos
-            text: "Morgan's Christmas Present"
+            text: "Morgan's Christmas App II"
+            font_name: "Roboto-BoldItalic"
             color: 1, 1, 1, 1
-            font_size: 25
+            font_size: 30
             size_hint: (1, 0.1)  # Use a smaller space for the label
 
         BoxLayout:
@@ -39,18 +43,93 @@
                     text: "Find your Present!"
                     on_press: app.root.current = "LivingRoom"
 
-<LivingRoom>:
+<LivingRoom>
     name: "LivingRoom"
+    Image: 
+        source: 'pics/LivingRoom/livingroom.png'
+    Button:
+        size_hint: (.1, .3)  # Adjust width and height
+        pos_hint: {"x": 0, "center_y": 0.5}  # Left side, middle height
+        on_press: app.root.current = "Kitchen"  # Navigates to Closet
+        text: "Left Button"
+    
+    Button:
+        size_hint: (.3, None)  # Set width and fixed height
+        height: dp(50)  # Specify height
+        pos_hint: {"center_x": 0.5, "y": 0}  # Bottom center
+        text: "Middle Button"
+    
+    Button:
+        size_hint: (.1, .3)  # Adjust width and height
+        pos_hint: {"right": 1, "center_y": 0.5}  # Right side, middle height
+        on_press: app.root.current = "HalfBath"  # Navigates to LivingRoom
+        text: "Right Button"
+
+
+
+<HalfBath>
+    name: "HalfBath"
     Image:
-        source: 
-            "pics/LivingRoom/livingroom.png"
+        source: "pics/halfbath/halfbath.png"
+    FloatLayout:
+        Button:
+            size_hint: (.1, .1)  # Adjust width and height
+            background_color: (0,.1, 0, 1)
+            pos_hint: {"x": 0, "center_y": 0.5}  # Left side, middle height
+            on_press: app.root.current = "Closet"  # Navigates to Closet
+            text: "Left Button"
+        
+        Button:
+            size_hint: (.3, None)  # Set width and fixed height
+            height: dp(50)  # Specify height
+            pos_hint: {"center_x": 0.5, "y": 0}  # Bottom center
+            text: "Middle Button"
+        
+        Button:
+            size_hint: (.1, .3)  # Adjust width and height
+            pos_hint: {"right": 1, "center_y": 0.5}  # Right side, middle height
+            on_press: app.root.current = "LivingRoom"  # Navigates to LivingRoom
+            text: "Right Button"
+
+    
+
+
+<Kitchen>
+    name: "Kitchen"
+    Image:
+        source: "pics/Kitchen/kitchen.png"
     BoxLayout:
         orientation: 'horizontal'
         Button:
             size_hint: .2, .25
+            on_press: app.root.current = "Kitchen" # THIS SHOULD BE BARN
+
         Label:
         Button:
             size_hint: .2, .25
+            on_press: app.root.current = "LivingRoom"
 
 
-
+<Closet>
+    name: "Closet"
+    Image:
+        source: "pics/closet/closet.png"
+    FloatLayout:
+        Button:
+            size_hint: (.1, .1)  # Adjust width and height
+            pos_hint: {"x": 0.1, "center_y": 0.5}  # Left side, middle height
+            on_press: app.root.current = "Closet"  # Navigates to Closet
+            text: "Left Button"
+        
+        Button:
+            size_hint: (.3, None)  # Set width and fixed height
+            height: dp(50)  # Specify height
+            pos_hint: {"center_x": 0.5, "y": 0}  # Bottom center
+            on_press: app.root.current = "HalfBath"
+            text: "Back to Bathroom"
+        
+        Button:
+            size_hint: (.1, .3)  # Adjust width and height
+            pos_hint: {"right": 1, "center_y": 0.5}  # Right side, middle height
+            on_press: app.root.current = "HomeScreen"  # Navigates to LivingRoom
+            text: "Right Button"
