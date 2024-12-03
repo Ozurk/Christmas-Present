@@ -52,6 +52,9 @@ class Closet(Screen):
 class Kitchen(Screen):
     pass
 
+class Hallway(Screen):
+    pass
+
 
 if __name__ == '__main__':
     app = ChristmasPresentApp()

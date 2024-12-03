@@ -23,7 +23,7 @@ class ChristmasPresentApp(App):
     
     
 class ChristmasPresent(ScreenManager):
-    pass
+    inventory = {}
 
 class HomeScreen(Screen):
     pass
@@ -52,6 +52,14 @@ class Closet(Screen):
 class Kitchen(Screen):
     pass
 
+class Hallway(Screen):
+    pass
+
+class Outside(Screen):
+    pass
+
+class Inventory(Screen):
+    pass
 
 if __name__ == '__main__':
     app = ChristmasPresentApp()

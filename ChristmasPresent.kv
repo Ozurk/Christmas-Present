@@ -4,6 +4,9 @@
     HalfBath:
     Kitchen:
     Closet:
+    LaundryRoom:
+    Hallway:
+    Inventory:
 
 <HomeScreen>
     name: "HomeScreen"
@@ -62,8 +65,15 @@
     Button:
         size_hint: (.1, .3)  # Adjust width and height
         pos_hint: {"right": 1, "center_y": 0.5}  # Right side, middle height
-        on_press: app.root.current = "HalfBath"  # Navigates to LivingRoom
+        on_press: app.root.current = "Hallway"  
         text: "Right Button"
+
+    Button:
+        size_hint: (.2, .1)  # Adjust width and height
+        pos_hint: {"x": .1, "center_y": .9}  # Left side, middle height
+        on_press: app.root.current = "Inventory"  
+        text: "Inventory"
+
 
 
 
@@ -73,22 +83,22 @@
         source: "pics/halfbath/halfbath.png"
     FloatLayout:
         Button:
-            size_hint: (.1, .1)  # Adjust width and height
-            background_color: (0,.1, 0, 1)
+            size_hint: (.1, .3)  # Adjust width and height
             pos_hint: {"x": 0, "center_y": 0.5}  # Left side, middle height
             on_press: app.root.current = "Closet"  # Navigates to Closet
-            text: "Left Button"
+            text: "Closet"
         
         Button:
             size_hint: (.3, None)  # Set width and fixed height
             height: dp(50)  # Specify height
             pos_hint: {"center_x": 0.5, "y": 0}  # Bottom center
-            text: "Middle Button"
+            on_press: app.root.current = "Hallway"  # Navigates to LivingRoom
+            text: "Hallway"
         
         Button:
             size_hint: (.1, .3)  # Adjust width and height
             pos_hint: {"right": 1, "center_y": 0.5}  # Right side, middle height
-            on_press: app.root.current = "LivingRoom"  # Navigates to LivingRoom
+            on_press: app.root.current = "LaundryRoom"
             text: "Right Button"
 
     
@@ -133,3 +143,73 @@
             pos_hint: {"right": 1, "center_y": 0.5}  # Right side, middle height
             on_press: app.root.current = "HomeScreen"  # Navigates to LivingRoom
             text: "Right Button"
+
+<LaundryRoom>
+    name: "LaundryRoom"
+    Image:
+        source: "pics/LaundryRoom/LaundryRoom.png"
+        name: "LivingRoom"
+    Button:
+        size_hint: (.1, .3)  # Adjust width and height
+        pos_hint: {"x": 0, "center_y": 0.5}  # Left side, middle height
+        on_press: app.root.current = "Hallway"  # Navigates to Closet
+        text: "Hallway"
+    
+    Button:
+        size_hint: (.3, None)  # Set width and fixed height
+        height: dp(50)  # Specify height
+        pos_hint: {"center_x": 0.5, "y": 0}  # Bottom center
+        on_press: app.root.current = "Hallway"
+        text: "Hallway"
+    
+    Button:
+        size_hint: (.1, .3)  # Adjust width and height
+        pos_hint: {"right": 1, "center_y": 0.5}  # Right side, middle height
+        on_press: app.root.current = "LaundryRoom"  # Navigates to LivingRoom
+        text: "Laundry Room"
+
+<Hallway>
+    name: "Hallway"
+    Image:
+        source: "pics/hallway/hallway.png"
+    Button:
+        size_hint: (.1, .3)  # Adjust width and height
+        pos_hint: {"x": 0, "center_y": 0.5}  # Left side, middle height
+        on_press: app.root.current = "HalfBath"  # Navigates to Closet
+        text: "Bathroom"
+    
+    Button:
+        size_hint: (.3, None)  # Set width and fixed height
+        height: dp(50)  # Specify height
+        pos_hint: {"center_x": 0.5, "y": .8} 
+        text: "Outside"
+    
+    Button:
+        size_hint: (.1, .3)  # Adjust width and height
+        pos_hint: {"right": 1, "center_y": 0.5}  # Right side, middle height
+        on_press: app.root.current = "LaundryRoom"  # Navigates to LivingRoom Image: 
+        source: 'pics/LivingRoom/livingroom.png'
+        text: "LaundryRoom"
+
+<Outside>
+    name: "Outside"
+    Image:
+        source: "pics/outside/outside.png"
+    
+
+<Inventory>
+
+    name:"Inventory"
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            text: "Inventory"
+        GridLayout:
+            rows: 3
+            cols: 3
+        Button:
+            size_hint: (1, .3)  # Adjust width and height
+            on_press: app.root.current = "LivingRoom"  # find way to "Just go back"
+            text: "Back"
+
+    
