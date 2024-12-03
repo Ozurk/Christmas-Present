@@ -25,6 +25,12 @@ class ChristmasPresentApp(App):
     
 class ChristmasPresent(ScreenManager):
     inventory = {}
+    inventory_button = Button()
+
+    def go_to_inventory(self):
+        self.current = "Inventory"
+    
+    inventory_button.on_press = go_to_inventory
 
 
 class HomeScreen(Screen):
@@ -94,7 +100,8 @@ class Matches(Image):
             matches = Matches()
             inventory_box.add_widget(matches)
 
-
+class Barn(Screen):
+    pass
 
 if __name__ == '__main__':
     app = ChristmasPresentApp()
