@@ -12,6 +12,7 @@ from kivy.uix.popup import Popup
 from time import sleep
 from kivy.base import Builder
 from kivy.graphics import Rectangle
+from kivy.uix.image import Image
 
 Builder.load_file("ChristmasPresent.kv")
 
@@ -24,6 +25,7 @@ class ChristmasPresentApp(App):
     
 class ChristmasPresent(ScreenManager):
     inventory = {}
+
 
 class HomeScreen(Screen):
     pass
@@ -60,6 +62,23 @@ class Outside(Screen):
 
 class Inventory(Screen):
     pass
+
+class Key(Image):
+    def move_key_to_inventory(self, touch):
+        if self.collide_point(*touch.pos):
+            # Access the current app instance
+            app = App.get_running_app()
+            # Access the inventory screen's BoxLayout (inventory_box)
+            inventory_box = app.root.get_screen("Inventory").ids.inventory_box
+
+            # Remove the key from its current parent
+            if self.parent:
+                self.parent.remove_widget(self)
+
+            key = Key()
+            inventory_box.add_widget(key)
+
+
 
 if __name__ == '__main__':
     app = ChristmasPresentApp()
