@@ -6,6 +6,7 @@
     Closet:
     LaundryRoom:
     Hallway:
+    Inventory:
 
 <HomeScreen>
     name: "HomeScreen"
@@ -66,6 +67,13 @@
         pos_hint: {"right": 1, "center_y": 0.5}  # Right side, middle height
         on_press: app.root.current = "Hallway"  
         text: "Right Button"
+
+    Button:
+        size_hint: (.2, .1)  # Adjust width and height
+        pos_hint: {"x": .1, "center_y": .8}
+        on_press: app.root.current = "Inventory"  
+        text: "Inventory"
+
 
 
 
@@ -159,6 +167,10 @@
         pos_hint: {"right": 1, "center_y": 0.5}  # Right side, middle height
         on_press: app.root.current = "LaundryRoom"  # Navigates to LivingRoom
         text: "Laundry Room"
+    Key:
+        size: (30, 30)
+        pos_hint: {"right": .7, "y": .6}
+        on_touch_down: self.move_key_to_inventory(args[1])
 
 <Hallway>
     name: "Hallway"
@@ -182,3 +194,31 @@
         on_press: app.root.current = "LaundryRoom"  # Navigates to LivingRoom Image: 
         source: 'pics/LivingRoom/livingroom.png'
         text: "LaundryRoom"
+
+<Outside>
+    name: "Outside"
+    Image:
+        source: "pics/outside/outside.png"
+    
+
+<Inventory>
+    id: Inventory
+
+    name:"Inventory"
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            text: "Inventory"
+        GridLayout:
+            id: inventory_box
+            rows: 3
+            cols: 3
+        Button:
+            size_hint: (1, .3)  # Adjust width and height
+            on_press: app.root.current = "LivingRoom"
+            text: "Back"
+
+<Key>
+    id: Key
+    size_hint: (None, None)
+    source: "pics/inventory/key.png"
