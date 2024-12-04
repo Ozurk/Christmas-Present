@@ -25,6 +25,12 @@ class ChristmasPresentApp(App):
     
 class ChristmasPresent(ScreenManager):
     inventory = {}
+    inventory_button = Button()
+
+    def go_to_inventory(self):
+        self.current = "Inventory"
+    
+    inventory_button.on_press = go_to_inventory
 
 
 class HomeScreen(Screen):
@@ -64,7 +70,7 @@ class Inventory(Screen):
     pass
 
 class Key(Image):
-    def move_key_to_inventory(self, touch):
+    def move_to_inventory(self, touch):
         if self.collide_point(*touch.pos):
             # Access the current app instance
             app = App.get_running_app()
@@ -79,6 +85,23 @@ class Key(Image):
             inventory_box.add_widget(key)
 
 
+class Matches(Image):
+    def move_to_inventory(self, touch):
+        if self.collide_point(*touch.pos):
+            # Access the current app instance
+            app = App.get_running_app()
+            # Access the inventory screen's BoxLayout (inventory_box)
+            inventory_box = app.root.get_screen("Inventory").ids.inventory_box
+
+            # Remove the key from its current parent
+            if self.parent:
+                self.parent.remove_widget(self)
+
+            matches = Matches()
+            inventory_box.add_widget(matches)
+
+class Barn(Screen):
+    pass
 
 if __name__ == '__main__':
     app = ChristmasPresentApp()

@@ -182,7 +182,7 @@
         on_press: app.root.current = "LaundryRoom"  # Navigates to LivingRoom
         text: "Laundry Room"
     Key:
-        size: (80, 80)
+        size: (150, 150)
         pos_hint: {"right": .7, "y": .6}
         on_touch_down: self.move_to_inventory(args[1])
 
@@ -265,14 +265,17 @@
 
 <Key>
     id: Key
+    size: 150, 150
     size_hint: (None, None)
     source: "pics/inventory/key.png"
 
 <Matches>
     id: Matches
     size_hint: (None, None)
+    size: 150, 150
     source: "pics/inventory/matches.png"
     on_touch_down: root.move_to_inventory(args[1])
+    
     
 
 <Barn>

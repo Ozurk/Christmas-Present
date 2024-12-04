@@ -7,6 +7,8 @@
     LaundryRoom:
     Hallway:
     Inventory:
+    Barn:
+    Outside:
 
 <HomeScreen>
     name: "HomeScreen"
@@ -69,7 +71,7 @@
         text: "Right Button"
 
     Button:
-        size_hint: (.2, .1)  # Adjust width and height
+        size_hint: (.3, .02)  # Adjust width and height
         pos_hint: {"x": .1, "center_y": .8}
         on_press: app.root.current = "Inventory"  
         text: "Inventory"
@@ -108,16 +110,28 @@
     name: "Kitchen"
     Image:
         source: "pics/Kitchen/kitchen.png"
-    BoxLayout:
-        orientation: 'horizontal'
+    FloatLayout:
         Button:
-            size_hint: .2, .25
-            on_press: app.root.current = "Kitchen" # THIS SHOULD BE BARN
-
-        Label:
+            size_hint: (.1, .3)  # Adjust width and height
+            pos_hint: {"x": 0, "center_y": 0.5}  # Left side, middle height
+            on_press: app.root.current = "Outside" 
+            text: "Outside"
+    
         Button:
-            size_hint: .2, .25
-            on_press: app.root.current = "LivingRoom"
+            size_hint: (.3, None)  # Set width and fixed height
+            height: dp(50)  # Specify height
+            pos_hint: {"center_x": 0.5, "y": 0}  # Bottom center
+            on_press: app.root.current = "Hallway"
+            text: "Hallway"
+    
+        Button:
+            size_hint: (.1, .3)  # Adjust width and height
+            pos_hint: {"right": 1, "center_y": 0.5}  # Right side, middle height
+            on_press: app.root.current = "LivingRoom"  # Navigates to LivingRoom
+            text: "living Room"
+        Matches:
+            size: (50, 50)
+            pos_hint: {"x": .3, "y": .3}
 
 
 <Closet>
@@ -168,9 +182,9 @@
         on_press: app.root.current = "LaundryRoom"  # Navigates to LivingRoom
         text: "Laundry Room"
     Key:
-        size: (30, 30)
+        size: (80, 80)
         pos_hint: {"right": .7, "y": .6}
-        on_touch_down: self.move_key_to_inventory(args[1])
+        on_touch_down: self.move_to_inventory(args[1])
 
 <Hallway>
     name: "Hallway"
@@ -180,13 +194,13 @@
         size_hint: (.1, .3)  # Adjust width and height
         pos_hint: {"x": 0, "center_y": 0.5}  # Left side, middle height
         on_press: app.root.current = "HalfBath"  # Navigates to Closet
-        text: "Bathroom"
-    
+        text: "Bath"
+        
     Button:
-        size_hint: (.3, None)  # Set width and fixed height
-        height: dp(50)  # Specify height
         pos_hint: {"center_x": 0.5, "y": .8} 
         text: "Outside"
+        size_hint: (.3, None)
+        on_press: app.root.current = "Outside"
     
     Button:
         size_hint: (.1, .3)  # Adjust width and height
@@ -194,11 +208,42 @@
         on_press: app.root.current = "LaundryRoom"  # Navigates to LivingRoom Image: 
         source: 'pics/LivingRoom/livingroom.png'
         text: "LaundryRoom"
+    Button:
+        size_hint: (.3, None)  # Set width and fixed height
+        height: dp(50)  # Specify height
+        pos_hint: {"center_x": 0.5, "y": 0}  # Bottom center
+        on_press: app.root.current = "Kitchen"
+        text: "Kitchen"
+    
 
 <Outside>
     name: "Outside"
     Image:
         source: "pics/outside/outside.png"
+
+    Button:
+        size_hint: (.1, .3)  # Adjust width and height
+        pos_hint: {"x": 0, "center_y": 0.5}  # Left side, middle height
+        on_press: app.root.current = "HalfBath"  # Navigates to Closet
+        text: "Bath"
+    
+    Button:
+        pos_hint: {"center_x": 0.5, "y": .8} 
+        text: "woods"
+        size_hint: (.3, None)
+        on_press: app.root.current = "Outside"
+    
+    Button:
+        size_hint: (.1, .3)  # Adjust width and height
+        pos_hint: {"right": 1, "center_y": 0.5}  # Right side, middle height
+        on_press: app.root.current = "Barn"  
+        text: "Barn"
+    Button:
+        size_hint: (.3, None)  # Set width and fixed height
+        height: dp(50)  # Specify height
+        pos_hint: {"center_x": 0.5, "y": 0}  # Bottom center
+        on_press: app.root.current = "Hallway"
+        text: "Inside"
     
 
 <Inventory>
@@ -222,3 +267,21 @@
     id: Key
     size_hint: (None, None)
     source: "pics/inventory/key.png"
+
+<Matches>
+    id: Matches
+    size_hint: (None, None)
+    source: "pics/inventory/matches.png"
+    on_touch_down: root.move_to_inventory(args[1])
+    
+
+<Barn>
+    name: "Barn"
+    Image:
+        source: "pics/barn/barn.png"
+    Button:
+        pos_hint: {"center_x": 0.5, "y": .8} 
+        text: "Outside"
+        size_hint: (.3, None)
+        on_press: app.root.current = "Outside"
+    

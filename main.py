@@ -31,6 +31,7 @@ class ChristmasPresent(ScreenManager):
         self.current = "Inventory"
     
     inventory_button.on_press = go_to_inventory
+    
 
 
 class HomeScreen(Screen):
@@ -81,7 +82,7 @@ class Key(Image):
             if self.parent:
                 self.parent.remove_widget(self)
 
-            key = Key()
+            key = Key(size=(250, 250))
             inventory_box.add_widget(key)
 
 
@@ -97,7 +98,7 @@ class Matches(Image):
             if self.parent:
                 self.parent.remove_widget(self)
 
-            matches = Matches()
+            matches = Matches(size=(250, 250))
             inventory_box.add_widget(matches)
 
 class Barn(Screen):
