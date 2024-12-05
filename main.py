@@ -98,8 +98,25 @@ class Matches(Image):
             if self.parent:
                 self.parent.remove_widget(self)
 
-            matches = Matches(size=(250, 250))
+            matches = Matches(size=(400, 400))
             inventory_box.add_widget(matches)
+
+class Candle(Image):
+    def move_to_inventory(self, touch):
+        if self.collide_point(*touch.pos):
+            # Access the current app instance
+            app = App.get_running_app()
+            # Access the inventory screen's BoxLayout (inventory_box)
+            inventory_box = app.root.get_screen("Inventory").ids.inventory_box
+
+            # Remove the key from its current parent
+            if self.parent:
+                self.parent.remove_widget(self)
+
+            
+            widget = Candle(source=self.source, size=(400, 400), size_hint=(None, None))
+            inventory_box.add_widget(widget)
+
 
 class Barn(Screen):
     pass
