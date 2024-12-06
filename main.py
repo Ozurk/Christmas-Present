@@ -23,15 +23,8 @@ class ChristmasPresentApp(App):
         return app
     
     
-class ChristmasPresent(ScreenManager):
-    inventory = {}
-    inventory_button = Button()
-
-    def go_to_inventory(self):
-        self.current = "Inventory"
-    
-    inventory_button.on_press = go_to_inventory
-    
+class ChristmasPresent(BoxLayout):
+    pass
 
 
 class HomeScreen(Screen):
@@ -67,7 +60,7 @@ class Hallway(Screen):
 class Outside(Screen):
     pass
 
-class Inventory(Screen):
+class Inventory(GridLayout):
     pass
 
 class Key(Image):
@@ -76,7 +69,7 @@ class Key(Image):
             # Access the current app instance
             app = App.get_running_app()
             # Access the inventory screen's BoxLayout (inventory_box)
-            inventory_box = app.root.get_screen("Inventory").ids.inventory_box
+            inventory_box = inventory_box = app.root.ids.inventory
 
             # Remove the key from its current parent
             if self.parent:
@@ -92,13 +85,13 @@ class Matches(Image):
             # Access the current app instance
             app = App.get_running_app()
             # Access the inventory screen's BoxLayout (inventory_box)
-            inventory_box = app.root.get_screen("Inventory").ids.inventory_box
+            inventory_box = inventory_box = app.root.ids.inventory
 
             # Remove the key from its current parent
             if self.parent:
                 self.parent.remove_widget(self)
 
-            matches = Matches(size=(400, 400))
+            matches = Matches(size=(250, 250))
             inventory_box.add_widget(matches)
 
 class Candle(Image):
@@ -107,14 +100,14 @@ class Candle(Image):
             # Access the current app instance
             app = App.get_running_app()
             # Access the inventory screen's BoxLayout (inventory_box)
-            inventory_box = app.root.get_screen("Inventory").ids.inventory_box
+            inventory_box = app.root.ids.inventory
 
             # Remove the key from its current parent
             if self.parent:
                 self.parent.remove_widget(self)
 
             
-            widget = Candle(source=self.source, size=(400, 400), size_hint=(None, None))
+            widget = Candle(source=self.source, size=(200, 200), size_hint=(None, None))
             inventory_box.add_widget(widget)
 
 

@@ -113,8 +113,10 @@ class Candle(Image):
             if self.parent:
                 self.parent.remove_widget(self)
 
-            widget = Candle(size=(400, 400))
+            
+            widget = Candle(source=self.source, size=(400, 400), size_hint=(None, None))
             inventory_box.add_widget(widget)
+
 
 class Barn(Screen):
     pass
