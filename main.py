@@ -81,7 +81,10 @@ class Open_Box(Screen):
         app = App.get_running_app()
         inventory_box = app.root.ids.inventory
         rope = Rope(size=(250, 250))
-        inventory_box.add_widget(rope)
+        if "Rope" not in inventory_box.ids:
+            print(inventory_box.ids)
+            inventory_box.ids["Rope"] = rope
+            inventory_box.add_widget(rope)
         self.ids.Open_Box_ID.source = "pics/Woods/open_box.png"
         
 
@@ -132,6 +135,7 @@ class Matches(Image):
             closet_screen = screen_manager.get_screen("Closet")
             if closet_screen.ids.closet_image.source == "pics/closet/dark_closet_with_candle.png":
                 closet_screen.ids.closet_image.source = "pics/closet/light_closet.png"
+                closet_screen.ids.closet_text.text = ""
             else:
                 closet_screen.ids.closet_image.source = "pics/closet/dark_closet_with_matches.png"
                 closet_screen.ids.closet_text.text = "I wonder if there is a lamp or something that could be lit.."
@@ -158,8 +162,6 @@ class Candle(Image):
 
         # Debugging current state
         current_screen = screen_manager.current
-        print(f"Current screen: {current_screen}")
-        print(f"App ids: {app.root.ids}")
 
         if current_screen == "Closet":
             # Handle moving the Candle from inventory to Closet
@@ -179,6 +181,7 @@ class Candle(Image):
             closet_screen = screen_manager.get_screen("Closet")
             if closet_screen.ids.closet_image.source == "pics/closet/dark_closet_with_matches.png":
                 closet_screen.ids.closet_image.source = "pics/closet/light_closet.png"
+                closet_screen.ids.closet_text.text = ""
             else:
                 closet_screen.ids.closet_image.source = "pics/closet/dark_closet_with_candle.png"
                 closet_screen.ids.closet_text.text = "A candle is only good when lit"
@@ -198,7 +201,15 @@ class Candle(Image):
 
 
 class Rope(Image):
-    pass
+    def get_present(self, touch):
+        app = App.get_running_app()
+        inventory_box = app.root.ids.inventory
+        barn = app.root.ids.screenmanager.get_screen("Barn")
+        if app.root.ids.screenmanager.current == "Barn":
+            inventory_box.remove_widget(self)
+            barn.ids.Barn_Pic_ID.source = "pics/barn/present.png"
+            barn.ids.BarnLabel.text = "Merry Christmas!"
+    
 
 class Barn(Screen):
     pass

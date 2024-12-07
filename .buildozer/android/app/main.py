@@ -77,7 +77,13 @@ class LockBox(Screen):
 
 
 class Open_Box(Screen):
-    pass
+    def get_rope(self, touch):
+        app = App.get_running_app()
+        inventory_box = app.root.ids.inventory
+        rope = Rope(size=(250, 250))
+        inventory_box.add_widget(rope)
+        self.ids.Open_Box_ID.source = "pics/Woods/open_box.png"
+        
 
 class Key(Image):
     def move_to_inventory(self, touch):
@@ -191,6 +197,8 @@ class Candle(Image):
         inventory_box.add_widget(new_candle)
 
 
+class Rope(Image):
+    pass
 
 class Barn(Screen):
     pass

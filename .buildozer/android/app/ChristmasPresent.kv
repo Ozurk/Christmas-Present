@@ -2,7 +2,8 @@
     orientation: "vertical"
     Inventory:
         id: inventory
-        size_hint: None, .2
+        size_hint: None, .25
+        
 
     ScreenManager:
         id: screenmanager
@@ -166,10 +167,6 @@
     Image:
         source: "pics/LaundryRoom/LaundryRoom.png"
         name: "LivingRoom"
-    Button:
-        pos_hint: {"x": 0, "center_y": 0.5}  # Left side, middle height
-        on_press: app.root.ids.screenmanager.current  = "Hallway"  # Navigates to Closet
-        text: "Hallway"
     
     Button:
         size_hint: (.3, None)  # Set width and fixed height
@@ -207,6 +204,7 @@
         on_press: app.root.ids.screenmanager.current  = "LaundryRoom"  # Navigates to LivingRoom Image: 
         source: 'pics/LivingRoom/livingroom.png'
         text: "LaundryRoom"
+
     Button:
         size_hint: (.3, None)  # Set width and fixed height
         height: dp(50)  # Specify height
@@ -306,10 +304,18 @@
 <Open_Box>
     name: "Open_Box"
     Image:
-        source: "pics/Woods/open_box.png"
+        id: Open_Box_ID
+        source: "pics/Woods/open_box_with_rope.png"
+        on_touch_down: root.get_rope(args[1])
+        
     Button:
         size_hint: (.3, None)  # Set width and fixed height
         height: dp(50)  # Specify height
         pos_hint: {"center_x": 0.5, "y": 0}  # Bottom center
         on_press: app.root.ids.screenmanager.current  = "Woods"
         text: "Back"
+
+<Rope>
+    id:  "Rope"
+    source: "pics/Woods/rope.png"
+    size_hint: None, None

@@ -58,10 +58,6 @@
 
 <LivingRoom>
     name: "LivingRoom"
-    Inventory:
-        size_hint: (1, .1)  # Adjust width and height
-        pos_hint: {"x": 0, "top": 1}
-        text: "Inventory"
     Image: 
         source: 'pics/LivingRoom/livingroom.png'
 
@@ -69,7 +65,7 @@
         size_hint: (.1, .3)  # Adjust width and height
         pos_hint: {"x": 0, "center_y": 0.5}  # Left side, middle height
         on_press: app.root.ids.screenmanager.current  = "Kitchen"  # Navigates to Closet
-        text: "Left Button"
+        text: "Kitchen"
     
     Button:
         size_hint: (.3, None)  # Set width and fixed height
@@ -81,7 +77,7 @@
         size_hint: (.1, .3)  # Adjust width and height
         pos_hint: {"right": 1, "center_y": 0.5}  # Right side, middle height
         on_press: app.root.ids.screenmanager.current  = "Hallway"  
-        text: "Right Button"
+        text: "Hallway"
 
     Candle:
         size: 200, 200
@@ -282,13 +278,29 @@
 
 <Barn>
     name: "Barn"
-    Image:
-        source: "pics/barn/barn.png"
-    Button:
-        pos_hint: {"center_x": 0.5, "y": .8} 
-        text: "Outside"
-        size_hint: (.3, None)
-        on_press: app.root.ids.screenmanager.current  = "Outside"
+    RelativeLayout:
+        Image:
+            id: Barn_Pic_ID
+            source: "pics/barn/barn.png"
+        Label:
+            id: BarnLabel
+            text: "It appears it appears that you need a way to get this down"
+            pos_hint: {"center_x": .5, "y": .8}
+            size_hint: (.5, .2)
+            color: (0, 0, 0, 1)
+            font_size: 38
+
+        Button:
+            id: Open_Present_Button
+            text: "Open_Present"
+            on_press: root.open_present(args[1])
+        
+        Button:
+            pos_hint: {"center_x": 0.5, "y": 0} 
+            text: "Outside"
+            size_hint: (.3, None)
+            on_press: app.root.ids.screenmanager.current  = "Outside"
+
     
 <Candle>
     id: Candle
@@ -319,3 +331,4 @@
     id:  "Rope"
     source: "pics/Woods/rope.png"
     size_hint: None, None
+    on_touch_down: self.get_present(args[1])
