@@ -15,6 +15,8 @@
         Outside:
         LaundryRoom:
         Closet:
+        Woods:
+        Open_Box:
 <HomeScreen>
     name: "HomeScreen"
     Image:
@@ -99,19 +101,10 @@
         Button:
             size_hint: (.3, None)  # Set width and fixed height
             height: dp(50)  # Specify height
-            pos_hint: {"center_x": 0.5, "y": 0}  # Bottom center
-            on_press: app.root.ids.screenmanager.current  = "Hallway"  # Navigates to LivingRoom
-            text: "Hallway"
+            pos_hint: {"center_x": 0.5, "y": 0}  # Botto     
+            on_press: app.root.ids.screenmanager.current = "Hallway" 
+            text: "Hallway"  
         
-        Button:
-            size_hint: (.1, .3)  # Adjust width and height
-            pos_hint: {"right": 1, "center_y": 0.5}  # Right side, middle height
-            on_press: app.root.ids.screenmanager.current  = "LaundryRoom"
-            text: "Right Button"
-
-    
-
-
 <Kitchen>
     name: "Kitchen"
     Image:
@@ -163,7 +156,10 @@
         Key:
             size: (150, 150)
             pos_hint: {"right": .8, "y": .6}
-            on_touch_down: if root.ids.closet_image.source = "pics/closet/light_closet.png": self.move_to_inventory(args[1])
+            opacity: 1 if root.ids.closet_image.source == "pics/closet/light_closet.png" else 0
+            disabled: root.ids.closet_image.source != "pics/closet/light_closet.png"
+            on_touch_down: if root.ids.closet_image.source == "pics/closet/light_closet.png": self.move_to_inventory(args[1])
+
 
 <LaundryRoom>
     name: "LaundryRoom"
@@ -171,7 +167,6 @@
         source: "pics/LaundryRoom/LaundryRoom.png"
         name: "LivingRoom"
     Button:
-        size_hint: (.1, .3)  # Adjust width and height
         pos_hint: {"x": 0, "center_y": 0.5}  # Left side, middle height
         on_press: app.root.ids.screenmanager.current  = "Hallway"  # Navigates to Closet
         text: "Hallway"
@@ -222,18 +217,14 @@
 
 <Outside>
     name: "Outside"
+    Image:
+        source: "pics/outside/outside.png"
 
-    Button:
-        size_hint: (.1, .3)  # Adjust width and height
-        pos_hint: {"x": 0, "center_y": 0.5}  # Left side, middle height
-        on_press: app.root.ids.screenmanager.current  = "HalfBath"  # Navigates to Closet
-        text: "Bath"
-    
     Button:
         pos_hint: {"center_x": 0.5, "y": .8} 
         text: "woods"
         size_hint: (.3, None)
-        on_press: app.root.ids.screenmanager.current  = "Outside"
+        on_press: app.root.ids.screenmanager.current  = "Woods"
     
     Button:
         size_hint: (.1, .3)  # Adjust width and height
@@ -247,6 +238,29 @@
         on_press: app.root.ids.screenmanager.current  = "Hallway"
         text: "Inside"
     
+<Woods>
+    name: "Woods"
+    RelativeLayout:
+        Image:
+            source: "pics/Woods/woods.png"
+        Label:
+            text: "It Doesn't Appear to be Unlocked"
+            pos_hint: {"center_x": .5, "y": .8}
+            size_hint: (.5, .2)
+            color: (0, 0, 0, 1)
+            font_size: 38
+        LockBox:
+            size: (400, 400)
+            pos_hint: {"x": .24 , "y":.2 }
+            on_touch_down: self.open(args[1])
+    Button:
+        size_hint: (.3, None)  # Set width and fixed height
+        height: dp(50)  # Specify height
+        pos_hint: {"center_x": 0.5, "y": 0}  # Bottom center
+        on_press: app.root.ids.screenmanager.current  = "Outside"
+        text: "Back"
+        
+
         
 <Inventory>
     rows: 1
@@ -284,4 +298,18 @@
     size_hint: None, None
     on_touch_down: self.move_to_inventory(args[1])
 
+<LockBox>
+    size_hint: None, None
+    Image:
+        source: "pics/Woods/lockbox.png"
 
+<Open_Box>
+    name: "Open_Box"
+    Image:
+        source: "pics/Woods/open_box.png"
+    Button:
+        size_hint: (.3, None)  # Set width and fixed height
+        height: dp(50)  # Specify height
+        pos_hint: {"center_x": 0.5, "y": 0}  # Bottom center
+        on_press: app.root.ids.screenmanager.current  = "Woods"
+        text: "Back"
