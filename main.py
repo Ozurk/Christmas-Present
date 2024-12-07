@@ -81,18 +81,47 @@ class Key(Image):
 
 class Matches(Image):
     def move_to_inventory(self, touch):
-        if self.collide_point(*touch.pos):
-            # Access the current app instance
-            app = App.get_running_app()
-            # Access the inventory screen's BoxLayout (inventory_box)
-            inventory_box = inventory_box = app.root.ids.inventory
+        if not self.collide_point(*touch.pos):
+            return
+        
+        app = App.get_running_app()
+        screen_manager = app.root.ids.screenmanager
+        inventory_box = inventory_box = app.root.ids.inventory
 
-            # Remove the key from its current parent
+        current_screen = screen_manager.current
+
+        if current_screen == "Closet":
+            # Handle moving the Candle from inventory to Closet
+            self._move_to_closet(inventory_box, screen_manager)
+        else:
+            # Move Candle to inventory
+            self._move_to_inventory(inventory_box)            
+            
+
+    def _move_to_closet(self, inventory_box, screen_manager):
+        if "inventory_matches" in inventory_box.ids:
+            # Remove the Candle from inventory
+            Matches = inventory_box.ids.pop("inventory_matches")
+            inventory_box.remove_widget(Matches)
+
+            # Update the Closet screen's image
+            closet_screen = screen_manager.get_screen("Closet")
+            if closet_screen.ids.closet_image.source == "pics/closet/dark_closet_with_candle.png":
+                closet_screen.ids.closet_image.source = "pics/closet/light_closet.png"
+            else:
+                closet_screen.ids.closet_image.source = "pics/closet/dark_closet_with_matches.png"
+                closet_screen.ids.closet_text.text = "I wonder if there is a lamp or something that could be lit.."
+
+    def _move_to_inventory(self, inventory_box):
             if self.parent:
                 self.parent.remove_widget(self)
 
-            matches = Matches(size=(250, 250))
-            inventory_box.add_widget(matches)
+            # Create a new Candle widget and add it to the inventory
+            new_matches = Matches(size=(250, 250), size_hint=(None, None)
+            )
+            inventory_box.ids["inventory_matches"] = new_matches
+            inventory_box.add_widget(new_matches)
+
 
 class Candle(Image):
     def move_to_inventory(self, touch):
@@ -124,7 +153,11 @@ class Candle(Image):
 
             # Update the Closet screen's image
             closet_screen = screen_manager.get_screen("Closet")
-            closet_screen.ids.closet_image.source = "pics/closet/dark_closet_with_candle.png"
+            if closet_screen.ids.closet_image.source == "pics/closet/dark_closet_with_matches.png":
+                closet_screen.ids.closet_image.source = "pics/closet/light_closet.png"
+            else:
+                closet_screen.ids.closet_image.source = "pics/closet/dark_closet_with_candle.png"
+                closet_screen.ids.closet_text.text = "A candle is only good when lit"
 
     def _move_to_inventory(self, inventory_box):
         """Move the Candle widget to the inventory."""
