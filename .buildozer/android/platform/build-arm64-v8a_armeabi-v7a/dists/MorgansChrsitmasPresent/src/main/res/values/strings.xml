@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Christmas Present</string>
-    <string name="private_version">a2227f430d5600fa14847aead21f6f71d7a6d142</string>
+    <string name="private_version">56e072334c093a42b465bed297dc2776b3a88033</string>
     <string name="presplash_color">#000000</string>
     <string name="urlScheme">kivy</string>
 </resources>

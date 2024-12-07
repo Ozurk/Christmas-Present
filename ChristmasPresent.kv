@@ -14,6 +14,7 @@
         Barn:
         Outside:
         LaundryRoom:
+        Closet:
 <HomeScreen>
     name: "HomeScreen"
     Image:
@@ -82,8 +83,7 @@
     Candle:
         size: 200, 200
         pos_hint: {"x": .67, "center_y": .45}
-        on_touch_down: self.move_to_inventory(args[1])
-
+        
 
 <HalfBath>
     name: "HalfBath"
@@ -142,7 +142,9 @@
 
 <Closet>
     name: "Closet"
+    id: closet
     Image:
+        id: closet_image
         source: "pics/closet/dark_closet.png"
     FloatLayout:
         Label:
@@ -288,4 +290,6 @@
     id: Candle
     source: "pics/inventory/candle.png"
     size_hint: None, None
+    on_touch_down: self.move_to_inventory(args[1])
+
 

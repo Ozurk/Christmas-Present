@@ -97,10 +97,17 @@ class Matches(Image):
 class Candle(Image):
     def move_to_inventory(self, touch):
         if self.collide_point(*touch.pos):
-            # Access the current app instance
             app = App.get_running_app()
-            # Access the inventory screen's BoxLayout (inventory_box)
+            print("--" + app.root.ids.screenmanager.current + "--")
+            print(app.root.ids)
             inventory_box = app.root.ids.inventory
+            if str(app.root.ids.screenmanager.current) == "Closet":
+                if "inventory_candle" in inventory_box.ids:
+                    candle = inventory_box.ids["inventory_candle"]
+                    inventory_box.remove_widget(candle)
+                    closet_screen = app.root.ids.screenmanager.get_screen("Closet")
+                    closet_screen.ids.closet_image.source = "pics/closet/dark_closet_with_candle.png"
+                    return
 
             # Remove the key from its current parent
             if self.parent:
@@ -108,6 +115,7 @@ class Candle(Image):
 
             
             widget = Candle(source=self.source, size=(200, 200), size_hint=(None, None))
+            inventory_box.ids["inventory_candle"] = widget
             inventory_box.add_widget(widget)
 
 

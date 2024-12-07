@@ -1,15 +1,19 @@
 <ChristmasPresent>
-    BoxLayout:
-    HomeScreen:
-    LivingRoom:
-    HalfBath:
-    Kitchen:
-    Closet:
-    LaundryRoom:
-    Hallway:
-    Barn:
-    Outside:
+    orientation: "vertical"
     Inventory:
+        id: inventory
+        size_hint: None, .2
+
+    ScreenManager:
+        id: screenmanager
+        HomeScreen:
+        LivingRoom:
+        HalfBath:
+        Kitchen:
+        Hallway:
+        Barn:
+        Outside:
+        LaundryRoom:
 <HomeScreen>
     name: "HomeScreen"
     Image:
@@ -46,7 +50,7 @@
                     size_hint: (.6, .2)  # Button size is 30% width, 20% height of parent
                     background_color: [.1, 1, 0, 1]
                     text: "Find your Present!"
-                    on_press: app.root.current = "LivingRoom"
+                    on_press: app.root.ids.screenmanager.current = "LivingRoom"
 
 <LivingRoom>
     name: "LivingRoom"
@@ -60,7 +64,7 @@
     Button:
         size_hint: (.1, .3)  # Adjust width and height
         pos_hint: {"x": 0, "center_y": 0.5}  # Left side, middle height
-        on_press: app.root.current = "Kitchen"  # Navigates to Closet
+        on_press: app.root.ids.screenmanager.current  = "Kitchen"  # Navigates to Closet
         text: "Left Button"
     
     Button:
@@ -72,7 +76,7 @@
     Button:
         size_hint: (.1, .3)  # Adjust width and height
         pos_hint: {"right": 1, "center_y": 0.5}  # Right side, middle height
-        on_press: app.root.current = "Hallway"  
+        on_press: app.root.ids.screenmanager.current  = "Hallway"  
         text: "Right Button"
 
     Candle:
@@ -89,20 +93,20 @@
         Button:
             size_hint: (.1, .3)  # Adjust width and height
             pos_hint: {"x": 0, "center_y": 0.5}  # Left side, middle height
-            on_press: app.root.current = "Closet"  # Navigates to Closet
+            on_press: app.root.ids.screenmanager.current  = "Closet"  # Navigates to Closet
             text: "Closet"
         
         Button:
             size_hint: (.3, None)  # Set width and fixed height
             height: dp(50)  # Specify height
             pos_hint: {"center_x": 0.5, "y": 0}  # Bottom center
-            on_press: app.root.current = "Hallway"  # Navigates to LivingRoom
+            on_press: app.root.ids.screenmanager.current  = "Hallway"  # Navigates to LivingRoom
             text: "Hallway"
         
         Button:
             size_hint: (.1, .3)  # Adjust width and height
             pos_hint: {"right": 1, "center_y": 0.5}  # Right side, middle height
-            on_press: app.root.current = "LaundryRoom"
+            on_press: app.root.ids.screenmanager.current  = "LaundryRoom"
             text: "Right Button"
 
     
@@ -115,20 +119,20 @@
     Button:
         size_hint: (.1, .3)  # Adjust width and height
         pos_hint: {"x": 0, "center_y": 0.5}  # Left side, middle height
-        on_press: app.root.current = "Outside" 
+        on_press: app.root.ids.screenmanager.current  = "Outside" 
         text: "Outside"
 
     Button:
         size_hint: (.3, None)  # Set width and fixed height
         height: dp(50)  # Specify height
         pos_hint: {"center_x": 0.5, "y": 0}  # Bottom center
-        on_press: app.root.current = "Hallway"
+        on_press: app.root.ids.screenmanager.current  = "Hallway"
         text: "Hallway"
 
     Button:
         size_hint: (.1, .3)  # Adjust width and height
         pos_hint: {"right": 1, "center_y": 0.5}  # Right side, middle height
-        on_press: app.root.current = "LivingRoom"  # Navigates to LivingRoom
+        on_press: app.root.ids.screenmanager.current  = "LivingRoom"  # Navigates to LivingRoom
         text: "living Room"
     Matches:
         size: (200, 300)
@@ -148,20 +152,20 @@
         Button:
             size_hint: (.1, .1)  # Adjust width and height
             pos_hint: {"x": 0.1, "center_y": 0.5}  # Left side, middle height
-            on_press: app.root.current = "Closet"  # Navigates to Closet
+            on_press: app.root.ids.screenmanager.current  = "Closet"  # Navigates to Closet
             text: "Left Button"
         
         Button:
             size_hint: (.3, None)  # Set width and fixed height
             height: dp(50)  # Specify height
             pos_hint: {"center_x": 0.5, "y": 0}  # Bottom center
-            on_press: app.root.current = "HalfBath"
+            on_press: app.root.ids.screenmanager.current  = "HalfBath"
             text: "Back to Bathroom"
         
         Button:
             size_hint: (.1, .3)  # Adjust width and height
             pos_hint: {"right": 1, "center_y": 0.5}  # Right side, middle height
-            on_press: app.root.current = "HomeScreen"  # Navigates to LivingRoom
+            on_press: app.root.ids.screenmanager.current  = "HomeScreen"  # Navigates to LivingRoom
             text: "Right Button"
 
 <LaundryRoom>
@@ -172,20 +176,20 @@
     Button:
         size_hint: (.1, .3)  # Adjust width and height
         pos_hint: {"x": 0, "center_y": 0.5}  # Left side, middle height
-        on_press: app.root.current = "Hallway"  # Navigates to Closet
+        on_press: app.root.ids.screenmanager.current  = "Hallway"  # Navigates to Closet
         text: "Hallway"
     
     Button:
         size_hint: (.3, None)  # Set width and fixed height
         height: dp(50)  # Specify height
         pos_hint: {"center_x": 0.5, "y": 0}  # Bottom center
-        on_press: app.root.current = "Hallway"
+        on_press: app.root.ids.screenmanager.current  = "Hallway"
         text: "Hallway"
     
     Button:
         size_hint: (.1, .3)  # Adjust width and height
         pos_hint: {"right": 1, "center_y": 0.5}  # Right side, middle height
-        on_press: app.root.current = "LaundryRoom"  # Navigates to LivingRoom
+        on_press: app.root.ids.screenmanager.current  = "LaundryRoom"  # Navigates to LivingRoom
         text: "Laundry Room"
     Key:
         size: (150, 150)
@@ -199,65 +203,60 @@
     Button:
         size_hint: (.1, .3)  # Adjust width and height
         pos_hint: {"x": 0, "center_y": 0.5}  # Left side, middle height
-        on_press: app.root.current = "HalfBath"  # Navigates to Closet
+        on_press: app.root.ids.screenmanager.current  = "HalfBath"  # Navigates to Closet
         text: "Bath"
         
     Button:
         pos_hint: {"center_x": 0.5, "y": .8} 
         text: "Outside"
         size_hint: (.3, None)
-        on_press: app.root.current = "Outside"
+        on_press: app.root.ids.screenmanager.current  = "Outside"
     
     Button:
         size_hint: (.1, .3)  # Adjust width and height
         pos_hint: {"right": 1, "center_y": 0.5}  # Right side, middle height
-        on_press: app.root.current = "LaundryRoom"  # Navigates to LivingRoom Image: 
+        on_press: app.root.ids.screenmanager.current  = "LaundryRoom"  # Navigates to LivingRoom Image: 
         source: 'pics/LivingRoom/livingroom.png'
         text: "LaundryRoom"
     Button:
         size_hint: (.3, None)  # Set width and fixed height
         height: dp(50)  # Specify height
         pos_hint: {"center_x": 0.5, "y": 0}  # Bottom center
-        on_press: app.root.current = "Kitchen"
+        on_press: app.root.ids.screenmanager.current  = "Kitchen"
         text: "Kitchen"
     
 
 <Outside>
     name: "Outside"
-    Image:
-        source: "pics/outside/outside.png"
 
     Button:
         size_hint: (.1, .3)  # Adjust width and height
         pos_hint: {"x": 0, "center_y": 0.5}  # Left side, middle height
-        on_press: app.root.current = "HalfBath"  # Navigates to Closet
+        on_press: app.root.ids.screenmanager.current  = "HalfBath"  # Navigates to Closet
         text: "Bath"
     
     Button:
         pos_hint: {"center_x": 0.5, "y": .8} 
         text: "woods"
         size_hint: (.3, None)
-        on_press: app.root.current = "Outside"
+        on_press: app.root.ids.screenmanager.current  = "Outside"
     
     Button:
         size_hint: (.1, .3)  # Adjust width and height
         pos_hint: {"right": 1, "center_y": 0.5}  # Right side, middle height
-        on_press: app.root.current = "Barn"  
+        on_press: app.root.ids.screenmanager.current  = "Barn"  
         text: "Barn"
     Button:
         size_hint: (.3, None)  # Set width and fixed height
         height: dp(50)  # Specify height
         pos_hint: {"center_x": 0.5, "y": 0}  # Bottom center
-        on_press: app.root.current = "Hallway"
+        on_press: app.root.ids.screenmanager.current  = "Hallway"
         text: "Inside"
     
-
+        
 <Inventory>
-    name: "Inventory"
-    GridLayout:
-        id: inventory_box
-        rows: 1
-        cols: 5
+    rows: 1
+    cols: 5
         
 
 <Key>
@@ -283,7 +282,7 @@
         pos_hint: {"center_x": 0.5, "y": .8} 
         text: "Outside"
         size_hint: (.3, None)
-        on_press: app.root.current = "Outside"
+        on_press: app.root.ids.screenmanager.current  = "Outside"
     
 <Candle>
     id: Candle
