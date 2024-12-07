@@ -59,8 +59,24 @@ class Hallway(Screen):
 
 class Outside(Screen):
     pass
+class Woods(Screen):
+    pass
 
 class Inventory(GridLayout):
+    pass
+
+class LockBox(Screen):
+    def open(self, touch):
+        if self.collide_point(*touch.pos):
+            # Access the current app instance
+            app = App.get_running_app()
+            # Access the inventory screen's BoxLayout (inventory_box)
+            inventory_box = app.root.ids.inventory
+            if "key" in inventory_box.ids:
+                app.root.ids.screenmanager.current = "Open_Box"
+
+
+class Open_Box(Screen):
     pass
 
 class Key(Image):
@@ -74,9 +90,11 @@ class Key(Image):
             # Remove the key from its current parent
             if self.parent:
                 self.parent.remove_widget(self)
-
+            
             key = Key(size=(250, 250))
+            inventory_box.ids["key"] = key
             inventory_box.add_widget(key)
+        
 
 
 class Matches(Image):

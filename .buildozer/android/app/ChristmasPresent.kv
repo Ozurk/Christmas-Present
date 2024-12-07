@@ -14,6 +14,7 @@
         Barn:
         Outside:
         LaundryRoom:
+        Closet:
 <HomeScreen>
     name: "HomeScreen"
     Image:
@@ -82,8 +83,7 @@
     Candle:
         size: 200, 200
         pos_hint: {"x": .67, "center_y": .45}
-        on_touch_down: self.move_to_inventory(args[1])
-
+        
 
 <HalfBath>
     name: "HalfBath"
@@ -142,18 +142,16 @@
 
 <Closet>
     name: "Closet"
+    id: closet
     Image:
+        id: closet_image
         source: "pics/closet/dark_closet.png"
     FloatLayout:
         Label:
+            id: closet_text
             text: "It is too dark in here to see... If only there was some way to light it up"
             pos_hint: {"center_x": .5, "y": .8}
             size_hint: (.5, .2)
-        Button:
-            size_hint: (.1, .1)  # Adjust width and height
-            pos_hint: {"x": 0.1, "center_y": 0.5}  # Left side, middle height
-            on_press: app.root.ids.screenmanager.current  = "Closet"  # Navigates to Closet
-            text: "Left Button"
         
         Button:
             size_hint: (.3, None)  # Set width and fixed height
@@ -162,11 +160,10 @@
             on_press: app.root.ids.screenmanager.current  = "HalfBath"
             text: "Back to Bathroom"
         
-        Button:
-            size_hint: (.1, .3)  # Adjust width and height
-            pos_hint: {"right": 1, "center_y": 0.5}  # Right side, middle height
-            on_press: app.root.ids.screenmanager.current  = "HomeScreen"  # Navigates to LivingRoom
-            text: "Right Button"
+        Key:
+            size: (150, 150)
+            pos_hint: {"right": .8, "y": .6}
+            on_touch_down: if root.ids.closet_image.source = "pics/closet/light_closet.png": self.move_to_inventory(args[1])
 
 <LaundryRoom>
     name: "LaundryRoom"
@@ -191,10 +188,7 @@
         pos_hint: {"right": 1, "center_y": 0.5}  # Right side, middle height
         on_press: app.root.ids.screenmanager.current  = "LaundryRoom"  # Navigates to LivingRoom
         text: "Laundry Room"
-    Key:
-        size: (150, 150)
-        pos_hint: {"right": .8, "y": .6}
-        on_touch_down: self.move_to_inventory(args[1])
+    
 
 <Hallway>
     name: "Hallway"
@@ -288,4 +282,6 @@
     id: Candle
     source: "pics/inventory/candle.png"
     size_hint: None, None
+    on_touch_down: self.move_to_inventory(args[1])
+
 
