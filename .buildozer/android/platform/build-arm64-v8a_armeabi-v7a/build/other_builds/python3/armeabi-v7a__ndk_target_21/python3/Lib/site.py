@@ -523,8 +523,7 @@ def venv(known_paths):
                     if key == 'include-system-site-packages':
                         system_site = value.lower()
                     elif key == 'home':
-                        # this is breaking pyconfig.h path detection with venv
-                        print('Ignoring "sys._home = value" override')
+                        sys._home = value
 
         sys.prefix = sys.exec_prefix = site_prefix
 

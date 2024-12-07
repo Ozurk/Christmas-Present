@@ -1,8 +1,26 @@
 <ChristmasPresent>
-    orientation: "vertical"
-    Inventory:
-        id: inventory
-        size_hint: None, .25
+    orientation: "horizontal"
+    BoxLayout:
+        size_hint: (.25, 1)
+        orientation: "vertical"
+        Label:
+            text: "Inventory"
+            font_name: "Roboto-BoldItalic"
+            size_hint_y: .2
+            canvas.before:
+                Color:
+                    rgba: (.2, .2, .2, .5)
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+        Inventory:
+            id: inventory
+            canvas.before:
+                Color:
+                    rgba: (.2, .2, .2, .5)
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
         
 
     ScreenManager:
@@ -58,10 +76,6 @@
 
 <LivingRoom>
     name: "LivingRoom"
-    Inventory:
-        size_hint: (1, .1)  # Adjust width and height
-        pos_hint: {"x": 0, "top": 1}
-        text: "Inventory"
     Image: 
         source: 'pics/LivingRoom/livingroom.png'
 
@@ -69,19 +83,13 @@
         size_hint: (.1, .3)  # Adjust width and height
         pos_hint: {"x": 0, "center_y": 0.5}  # Left side, middle height
         on_press: app.root.ids.screenmanager.current  = "Kitchen"  # Navigates to Closet
-        text: "Left Button"
-    
-    Button:
-        size_hint: (.3, None)  # Set width and fixed height
-        height: dp(50)  # Specify height
-        pos_hint: {"center_x": 0.5, "y": 0}  # Bottom center
-        text: "Middle Button"
+        text: "Kitchen"
     
     Button:
         size_hint: (.1, .3)  # Adjust width and height
         pos_hint: {"right": 1, "center_y": 0.5}  # Right side, middle height
         on_press: app.root.ids.screenmanager.current  = "Hallway"  
-        text: "Right Button"
+        text: "Hallway"
 
     Candle:
         size: 200, 200
@@ -130,7 +138,7 @@
         text: "living Room"
     Matches:
         size: (200, 300)
-        pos_hint: {'x': 0.23, 'y': 0.28} 
+        pos_hint: {'x': 0.23, 'y': 0.26} 
 
 
 
@@ -243,7 +251,7 @@
             source: "pics/Woods/woods.png"
         Label:
             text: "It Doesn't Appear to be Unlocked"
-            pos_hint: {"center_x": .5, "y": .8}
+            pos_hint: {"center_x": .5, "y": .65}
             size_hint: (.5, .2)
             color: (0, 0, 0, 1)
             font_size: 38
@@ -261,8 +269,8 @@
 
         
 <Inventory>
-    rows: 1
-    cols: 5
+    rows: 4
+    cols: 1
         
 
 <Key>
@@ -282,13 +290,23 @@
 
 <Barn>
     name: "Barn"
-    Image:
-        source: "pics/barn/barn.png"
-    Button:
-        pos_hint: {"center_x": 0.5, "y": .8} 
-        text: "Outside"
-        size_hint: (.3, None)
-        on_press: app.root.ids.screenmanager.current  = "Outside"
+    RelativeLayout:
+        Image:
+            id: Barn_Pic_ID
+            source: "pics/barn/barn.png"
+        Label:
+            id: BarnLabel
+            text: "It appears it appears that you need a way to get this down"
+            pos_hint: {"center_x": .5, "y": .8}
+            size_hint: (.5, .2)
+            font_size: 38
+        
+        Button:
+            pos_hint: {"center_x": 0.5, "y": 0} 
+            text: "Outside"
+            size_hint: (.3, None)
+            on_press: app.root.ids.screenmanager.current  = "Outside"
+
     
 <Candle>
     id: Candle
@@ -319,3 +337,4 @@
     id:  "Rope"
     source: "pics/Woods/rope.png"
     size_hint: None, None
+    on_touch_down: self.get_present(args[1])

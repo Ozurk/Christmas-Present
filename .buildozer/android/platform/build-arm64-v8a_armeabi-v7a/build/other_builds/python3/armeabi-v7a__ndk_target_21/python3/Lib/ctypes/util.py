@@ -4,15 +4,7 @@ import subprocess
 import sys
 
 # find_library(name) returns the pathname of a library, or None.
-
-# This patch overrides the find_library to look in the right places on
-# Android
-if True:
-    from android._ctypes_library_finder import find_library as _find_lib
-    def find_library(name):
-        return _find_lib(name)
-
-elif os.name == "nt":
+if os.name == "nt":
 
     def _get_build_version():
         """Return the version of MSVC that was used to build Python.
