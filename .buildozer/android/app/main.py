@@ -7,25 +7,30 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.textinput import TextInput
 from kivy.uix.scrollview import ScrollView
 from kivy.properties import StringProperty
-from kivy.uix.screenmanager import ScreenManager, Screen, RiseInTransition
-from kivy.uix.popup import Popup
+from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
 from time import sleep
 from kivy.base import Builder
 from kivy.graphics import Rectangle
 from kivy.uix.image import Image
+import datetime
 
 Builder.load_file("ChristmasPresent.kv")
 
 class ChristmasPresentApp(App):
     def build(self):
         app = ChristmasPresent()
-        app.transition = RiseInTransition()
+        app.ids.screenmanager.transition = FadeTransition()
         return app
     
     
 class ChristmasPresent(BoxLayout):
-    pass
-
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        app = App.get_running_app()
+        today = datetime.date.today()
+        if today < datetime.date(2024, 12,23):
+            # Deactivate the start button (safe access after KV is loaded)
+            raise Exception("it is not christmas yet!")
 
 class HomeScreen(Screen):
     pass
@@ -100,7 +105,7 @@ class Key(Image):
             if self.parent:
                 self.parent.remove_widget(self)
             
-            key = Key(size=(250, 250))
+            key = Key(size=(400, 400))
             inventory_box.ids["key"] = key
             inventory_box.add_widget(key)
         
@@ -145,7 +150,7 @@ class Matches(Image):
                 self.parent.remove_widget(self)
 
             # Create a new Candle widget and add it to the inventory
-            new_matches = Matches(size=(250, 250), size_hint=(None, None)
+            new_matches = Matches(size=(400, 400), size_hint=(None, None)
             )
             inventory_box.ids["inventory_matches"] = new_matches
             inventory_box.add_widget(new_matches)
@@ -194,7 +199,7 @@ class Candle(Image):
 
         # Create a new Candle widget and add it to the inventory
         new_candle = Candle(
-            source=self.source, size=(200, 200), size_hint=(None, None)
+            source=self.source, size=(400, 400), size_hint=(None, None)
         )
         inventory_box.ids["inventory_candle"] = new_candle
         inventory_box.add_widget(new_candle)
@@ -208,7 +213,7 @@ class Rope(Image):
         if app.root.ids.screenmanager.current == "Barn":
             inventory_box.remove_widget(self)
             barn.ids.Barn_Pic_ID.source = "pics/barn/present.png"
-            barn.ids.BarnLabel.text = "Merry Christmas!"
+            barn.ids.BarnLabel.text = "Merry Christmas!\nYour Present is in the barn!"
     
 
 class Barn(Screen):

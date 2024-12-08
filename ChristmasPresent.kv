@@ -6,6 +6,7 @@
         Label:
             text: "Inventory"
             font_name: "Roboto-BoldItalic"
+            font_size: 35
             size_hint_y: .2
             canvas.before:
                 Color:
@@ -69,6 +70,7 @@
                 anchor_y: "bottom"  # Vertical centering
 
                 Button:
+                    id: start
                     size_hint: (.6, .2)  # Button size is 30% width, 20% height of parent
                     background_color: [.1, 1, 0, 1]
                     text: "Find your Present!"
@@ -93,7 +95,7 @@
 
     Candle:
         size: 200, 200
-        pos_hint: {"x": .67, "center_y": .45}
+        pos_hint: {"x": .7, "center_y": .48}
         
 
 <HalfBath>
@@ -138,7 +140,7 @@
         text: "living Room"
     Matches:
         size: (200, 300)
-        pos_hint: {'x': 0.23, 'y': 0.26} 
+        pos_hint: {'x': 0.209, 'y': 0.305} 
 
 
 
@@ -163,8 +165,8 @@
             text: "Back to Bathroom"
         
         Key:
-            size: (150, 150)
-            pos_hint: {"right": .8, "y": .6}
+            size: (200, 200)
+            pos_hint: {"right": .9, "y": .6}
             opacity: 1 if root.ids.closet_image.source == "pics/closet/light_closet.png" else 0
             disabled: root.ids.closet_image.source != "pics/closet/light_closet.png"
             on_touch_down: if root.ids.closet_image.source == "pics/closet/light_closet.png": self.move_to_inventory(args[1])
@@ -249,6 +251,7 @@
     RelativeLayout:
         Image:
             source: "pics/Woods/woods.png"
+            size: root.size
         Label:
             text: "It Doesn't Appear to be Unlocked"
             pos_hint: {"center_x": .5, "y": .65}
