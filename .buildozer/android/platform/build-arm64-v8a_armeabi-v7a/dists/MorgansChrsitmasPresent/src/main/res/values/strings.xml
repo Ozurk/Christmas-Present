@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name">Open On Christmas</string>
-    <string name="private_version">648bfd25eca4e84439f680bf34ec4a84fb30da9f</string>
-    <string name="presplash_color">#000000</string>
-    <string name="urlScheme">kivy</string>
-</resources>
